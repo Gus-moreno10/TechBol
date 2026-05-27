@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Pedidos</h2>
+
+<a href="{{ url_for('pedidos.nuevo') }}" class="btn btn-primary mb-3">Nuevo Pedido</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.fecha.strftime('%Y-%m-%d') }}</td>
+            <td>{{ pedido.cliente.nombre }}</td>
+            <td>{{ pedido.producto.nombre }}</td>
+            <td>{{ pedido.monto | int }}</td>
+            <td>
+                <a href="{{ url_for('pedidos.eliminar', id=pedido.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
