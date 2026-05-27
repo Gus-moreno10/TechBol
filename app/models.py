@@ -7,14 +7,14 @@ class Producto(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Integer, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    pedidos = db.relationship('Pedido', backref='producto', lazy=True)
+    pedidos = db.relationship('Pedido', backref='producto', lazy=True, cascade="all, delete-orphan")
 
 class Cliente(db.Model):
     __tablename__ = 'clientes'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.String(20), nullable=False)
-    pedidos = db.relationship('Pedido', backref='cliente', lazy=True)
+    pedidos = db.relationship('Pedido', backref='cliente', lazy=True, cascade="all, delete-orphan")
 
 class Pedido(db.Model):
     __tablename__ = 'pedidos'
